@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-82npo7q&j63^%=z(h!-oku!x0756$n0!6(#z+c7l5i@q@2#uis
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-#o
+#opa
 
 ALLOWED_HOSTS = ['netflix-copia-production.up.railway.app']
 
