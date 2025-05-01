@@ -21,11 +21,13 @@
 
     {% endblock  %}
 </head>
-<body class=''>
+<body class='min-h-screen flex flex-col'>
     {% include "nav.html" %}
-    {% block content %}
+    <div class="flex-grow"> <!-- Aqui você aplica a classe -->
+        {% block content %}
 
-    {% endblock  %}
+        {% endblock %}
+      </div>
     {% include "footer.html" %}
     <script>
         function toggleResposta(id) {
