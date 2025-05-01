@@ -15,18 +15,23 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+import os
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-82npo7q&j63^%=z(h!-oku!x0756$n0!6(#z+c7l5i@q@2#uis'
+TOKEN_CSRF = os.getenv('TOKEN_CSRF')
+if TOKEN_CSRF:
+    SECRET_KEY = TOKEN_CSRF
+    CSRF_TRUSTED_ORIGINS = ['https://netflix-copia-production.up.railway.app']
+else:
+    SECRET_KEY = 'django-insecure-82npo7q&j63^%=z(h!-oku!x0756$n0!6(#z+c7l5i@q@2#uis'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #opa
 
-ALLOWED_HOSTS = ['netflix-copia-production.up.railway.app']
+ALLOWED_HOSTS = ['netflix-copia-production.up.railway.app', 'localhost', '127.0.0.1']
 
 
 
@@ -91,7 +96,7 @@ DATABASES = {
 }
 
 import dj_database_url
-import os #pertmite que trabalha com váriaveis de ambiente que não tem no seu cod
+ #pertmite que trabalha com váriaveis de ambiente que não tem no seu cod
 
 DATABASE_URL = os.getenv("URL_PÚBLICA_DO_BANCO_DE_DADOS")#ele só funciona se vc tiver rodando o cod lá no servidor!
 
