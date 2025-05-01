@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{%static 'css/login.css'%}">
+   <style>
+    input#id_username{
+        background-color:white;
+        color:black;
+        padding:10px;
+        margin: 20px auto;
+        border-radius:5px;
+        display:block;
+        width:90%;
+    }
+    input#id_password{
+        background-color:white;
+        color:black;
+        padding:10px;
+        margin: 20px auto;
+        border-radius:5px;
+        display:block;
+        width:90%;
+    }
+
+    footer a{
+        display:block;
+    }
+    @media screen and (min-width:1025px){
+        input#id_username{
+            padding:20px;
+        }
+        input#id_password{
+            padding:20px;
+        }
+    }
+   </style>
+{% endblock  %}
+{% block title %}
+   <title>Netflix | Login</title>
+{% endblock  %}
+{% block content %}
+    <div class='fundo relative mb-20 bg-cover bg-no-repeat shadow flex justify-center items-center overflow-hidden h-screen ' style="background-image: url('{% static 'image/fundo-netflix.jpg' %}');">
+
+        <form class='w-12/12 h-screen  m-auto p-15 bg-black md:bg-black/70 md:w-6/12 lg:w-5/12 lg:h-full md:mt-20 text-white' method='post'>
+            {% csrf_token %}
+            <h2 class='text-2xl font-bold my-5 lg:text-3xl'>Entrar</h2>
+            {{form}}
+            <input class='bg-red-600 p-2 rounded w-11/12 m-auto block lg:p-5'type="submit" value="Login">
+            <p class='text-center m-2'>Ou</p>
+            <div class='flex justify-center m-2 hover:text-orange-600'><a class='block m-auto' href="{%url 'filme:criarconta'%}">Criar Conta</a></div>
+        </form>
+    </div>
+    <footer class='p-10 m-0 text-white'>
+        <p>Dúvidas? Ligue para 0800 591 2876 (ligação grátis)</p>
+        <div class='flex justify-between '>
+            <div>
+                <a href="">
+                    Perguntas frequentes
+                </a>
+                <a href="">
+                    Termos de Uso
+                </a>
+                <a href="">
+                    Preferências de cookies
+                </a>
+            </div>
+            <div>
+                <a href="">
+                    Central de Ajuda
+                </a>
+                <a href="">
+                    Privacidade
+                </a>
+                <a href="">
+                    Informações corporativas
+                </a>
+            </div>
+        </div>
+    </footer>
+{% endblock  %}

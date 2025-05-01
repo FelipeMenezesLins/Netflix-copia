@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    
+    <style>
+        .assistir{
+            top:85%;
+            left:3%;
+        }
+        button{
+            cursor:pointer;
+        }
+        @media screen and (min-width:768px) and (max-width:992px) {
+            .assistir{
+                top:70%;
+                left:3%;
+            }
+        }
+        @media screen and (min-width:992px) and (max-width:1200px){
+            .assistir{
+                top:78%;
+                left:3%;
+            }
+        }
+    </style>
+{% endblock  %}
+{% block title %}
+    <title>Netflix | episodios</title>
+{% endblock  %}
+{% block content %}
+    <main>
+        <section class="relative  m-auto 
+        bg-contain bg-center bg-no-repeat
+        lg:bg-cover  
+        shadow  flex justify-center items-center overflow-hidden h-screen" style="background-image:url('{{object.imagem.url}}')">
+        </section>
+        <a class='assistir absolute bg-white text-xl p-4 lg:text-3xl rounded-3xl xl:w-50 flex  items.cente hover:bg-red-600 hover:text-white
+        hover:font-bold' href="{{object.episodios.first.video}}">
+            <span class="material-icons m-2 lg:text-xl">
+                play_arrow
+            </span>
+            <button class='m-2 lg:text-xl'>
+                Começar
+            </button>
+        </a>
+        <div class='p-5'>
+            <h2 class='text-white text-3xl font-bold m-5'>{{object.name}}</h2>
+            <p class='text-white text-xl m-5'>
+                {{object.descricao}}
+            </p>
+            <h2 class='text-white text-2xl font-bold m-5'>Episodios</h2>
+            {{object.titulo}}
+            <a class='text-white m-10 hover:text-red-600' href="{{object.episodios.first.video}}">
+                {{object.name}}
+            </a>
+        </div>
+        <h2 class='text-white text-3xl font-bold m-5'>
+            Filmes que você pode gostar!
+        </h2>
+        <div class='flex flex-wrap justify-center lg:flex-nowrap lg:justify-start'>
+            {% for filmes in relacionados %}
+                <a href="{%url 'filme:detalhesfilmes' filmes.pk%}">
+                    <img class='w-64 h-40 m-2 ' src="{{filmes.imagem.url}}">
+                </a>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock  %}

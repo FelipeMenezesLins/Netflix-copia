@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+
+<style>
+    .assistir{
+        top:85%;
+        left:3%;
+    }
+    button{
+        cursor:pointer;
+    }
+    @media screen and (min-width:768px) and (max-width:992px) {
+        .assistir{
+            top:70%;
+            left:3%;
+        }
+    }
+    @media screen and (min-width:992px) and (max-width:1200px){
+        .assistir{
+            top:78%;
+            left:3%;
+        }
+    }
+</style>
+{% endblock  %}
+{% block title %}
+
+{% endblock  %}
+{% block content %}
+    <header class='relative   
+        bg-contain bg-center bg-no-repeat
+        lg:bg-cover  
+        shadow  flex justify-center items-center overflow-hidden h-screen' style="background-image:url('{{filme_destaque.imagem.url}}')">
+    </header>
+    {% for filme in object_list %}
+    <a class='assistir absolute bg-white text-xl p-4 lg:text-3xl rounded-3xl xl:w-50 flex  items.cente hover:bg-red-600 hover:text-white
+    hover:font-bold' href="{%url 'filme:detalhesfilmes' filme.pk%}">
+        <span class="material-icons m-2 lg:text-xl">
+            play_arrow
+        </span>
+        <button class='m-2 lg:text-xl'>
+            Começar
+        </button>
+    </a>
+    {% endfor %}
+    <main class="relative w-full   p-6 overflow-hidden">
+      <h2 class='text-white text-2xl lg:text-3xl font-bold m-5'>
+        Lançamentos
+      </h2>
+        <div id="carrossel" class="flex transition-transform duration-500">
+          {% for f in object_list %}
+            <div class="slide flex-shrink-0 mx-2">
+              <a href="{%url 'filme:detalhesfilmes' f.pk%}">
+                <img class="h-64 w-96 object-cover rounded-lg" src="{{ f.imagem.url }}" alt="{{ f.name }}">
+            </a>
+              <p class="text-center mt-2 text-white">{{ f.name }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      
+        <!-- Botões -->
+        <button onclick="anterior()" class="absolute left-0 top-1/2 -translate-y-1/2 text-xl text-white p-5 rounded-full z-10 md:text-2xl">
+          &#10094;
+        </button>
+        <button onclick="proximo()" class="absolute right-0 top-1/2 -translate-y-1/2 text-xl text-white p-5 md:text-2xl w-15 h-15 rounded-full z-10">
+          &#10095;
+        </button>
+      </main>
+      
+      <script>
+        let index = 0;
+        const carrossel = document.getElementById('carrossel');
+        const slides = document.querySelectorAll('.slide');
+      
+        function atualizarCarrossel() {
+          const slideWidth = slides[0].offsetWidth + 16; // 16px vem do mx-2 (margem dos lados)
+          const deslocamento = index * slideWidth;
+          carrossel.style.transform = `translateX(-${deslocamento}px)`;
+        }
+      
+        function proximo() {
+          if (index < slides.length - 1) {
+            index++;
+            atualizarCarrossel();
+          }
+        }
+      
+        function anterior() {
+          if (index > 0) {
+            index--;
+            atualizarCarrossel();
+          }
+        }
+      </script>
+      
+      
+{% endblock  %}

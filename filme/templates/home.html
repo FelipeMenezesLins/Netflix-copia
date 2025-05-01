@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <style>
+      
+        .duvidas{
+            background-color:#3F3F3F;
+        }
+        .duvidas:hover{
+            background-color:gray;
+        }
+        .resposta {
+            border:1px solid gray;
+            background-color:#3F3F3F;
+        }
+        .motivos {
+            background-color:#3F3F3F;
+        }
+        div img {
+            display:block;
+            width:50px;
+        }
+        .cordefundo {
+            background-image: linear-gradient(to top, #100B0B, #2B1F1E);
+          }
+          #id_email {
+            background-color:gray;
+            color:white;
+            padding:14px;
+            border-radius:20px;
+            width:100%;
+        }
+        @media screen and (min-width:768px){
+            #id_email {
+                width:80%;
+                margin:5px;
+                display:block;
+                margin:auto;
+            }
+        }
+    </style>
+{% endblock  %}
+
+{% block title %}
+    <title>Netflix</title>
+{% endblock  %}
+
+{% block content %}
+    <main>
+        <div class='cordefundo p-5'>
+            <header class="relative w-11/12 m-auto mb-20 mt-20 p-10 bg-cover bg-no-repeat rounded-xl shadow md:w-10/12 md:h-100 flex justify-center items-center overflow-hidden" style="background-image: url('{% static 'image/fundo-netflix.jpg' %}');">
+
+                <!-- camada preta semitransparente -->
+                <div class="absolute inset-0 bg-black opacity-60"></div>
+              
+                <!-- conteúdo -->
+                <div class="relative z-10 w-11/12 text-white">
+                    <h2 class="text-2xl text-center md:text-3xl">Filmes, séries e muito mais, sem limites</h2>
+                    <p class="md:text-xl text-center">A partir de R$20,90. Cancele quando quiser.</p>
+                    <p class="text-center mb-4">Quer assistir? Informe seu email para criar ou reiniciar sua assinatura.</p>
+                    <form method='post' class='mt-6'>
+                        {% csrf_token %}
+                        <div class='flex items-center w-full'>
+                            <div class=' w-8/12 m-2'>{{form}}</div>
+                        
+                        <input class="bg-red-600 p-3  m-2 block rounded-3xl md:inline md:w-4/12 md:p-4 md:rounded-4xl" type="submit" value="Vamos lá">
+                        </div>
+                    </form>
+                </div>
+              </header>              
+            <div class='alta text-white p-5'>
+               <h2 class='text-2xl'>Em alta!</h2>
+               <p>carrosel de filmes</p> 
+            </div>
+        </div>
+       <div class='motivos_home text-white p-5 lg:flex w-10/12 m-auto lg:flex-wrap lg:justify-center'>
+        <h2 class='block w-full text-2xl lg:text-3xl font-bold'>Motivos pra assinar</h2>
+            <div class='motivos p-3 rounded m-3 lg:w-1/4'>
+                <h2 class='text-xl'>Aproveite na TV</h2>
+                <p class='text-sm'>Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.</p>
+                <img src="{%static 'image/tv-icon.webp'%}" alt="tv-icon">
+            </div>
+            <div class='motivos p-3 rounded m-3 lg:w-1/4'>
+                <h2 class='text-xl'>Baixe séries para assistir offiline</h2>
+                <p class='text-sm'>
+                    Salve seus títulos favoritos e sempre tenha algo para assistir
+                </p>
+                <img src="{%static 'image/download-icon.webp'%}" alt="tv-icon">
+            </div>
+            <div class='motivos p-3 rounded m-3 lg:w-1/4'>
+                <h2 class='text-xl'>Assista onde quiser</h2>
+                <p class='text-sm'>
+                    Assista a quantos filmes e séries quiser no celular, tablet, laptop e TV.
+                </p>
+                <img src="{%static 'image/celular-icon.png'%}" alt="tv-icon">
+            </div>
+            <div class='motivos p-3 rounded m-3 lg:w-1/4'>
+                <h2 class='text-xl'>Crie perfis para crianças</h2>
+                <p class='text-sm'>
+                    Deixe as crianças se aventurarem com seus personagens favoritos em um espaço feito só para elas, sem pagar a mais por isso.
+                </p>
+                <img src="{%static 'image/perfil-icon.jpg'%}" alt="tv-icon">
+            </div>
+       </div>
+
+       <div class="perguntas text-white p-5 lg:w-9/12 m-auto">
+        <h2 class='text-2xl mb-5 lg:text-3xl font-bold'>Perguntas Frequentes</h2>
+        {% for pergunta in object_list %}
+        <div class="duvida-item m-3">
+            <div 
+              class="duvidas p-3 md:p-5 rounded-xl cursor-pointer m-auto text-white"
+              onclick="toggleResposta({{ forloop.counter0 }})">
+              {{ pergunta.pergunta }}
+            </div>
+        
+            <p 
+              id="resposta-{{ forloop.counter0 }}"
+              class="resposta p-2 mt-2 rounded text-white hidden m-auto">
+              {{ pergunta.resposta }}
+            </p>
+          </div>
+        {% endfor %}
+       </div>
+    </main>
+{% endblock  %}

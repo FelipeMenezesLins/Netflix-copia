@@ -1,0 +1,66 @@
+{% load static %}
+<style>
+    
+    .extenco {
+        display:none;
+        width:200px;
+    } 
+    .logo{
+        width:50px;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+        .extenco {
+            display: block;
+
+        }
+        .logo{
+            display: none;
+        }
+    }
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+        .extenco {
+            display: block;
+        }
+        .logo{
+            display: none;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        .extenco {
+            display: block;
+        }
+        .logo{
+            display: none;
+        }
+    }
+</style>
+<nav class='flex justify-between p-5 w-full bg-transparent absolute top-0 z-100'>
+    <div>
+        {% if user.is_authenticated %}
+         <a href="{%url 'filme:homefilmes'%}">
+            <img class='extenco' src="{%static 'image/netflix-logo-extenco.png'%}" alt="">
+        </a>
+        <a href="{%url 'filme:homefilmes'%}">
+            <img class='logo'src="{%static 'image/netflix-logo.png'%}" alt="">
+        </a>
+        {% else %}
+        <a href="{%url 'filme:homepage'%}">
+            <img class='extenco' src="{%static 'image/netflix-logo-extenco.png'%}" alt="">
+        </a>
+        <a href="{%url 'filme:homepage'%}">
+            <img class='logo'src="{%static 'image/netflix-logo.png'%}" alt="">
+        </a>
+        {% endif %}
+    </div>
+    <div class='flex'>
+        {% if user.is_authenticated %}
+            <form class='mr-2' action="{%url 'filme:logout'%}" method='post'>
+                {%csrf_token%}
+                <button class='bg-transparent border-2 border-red-600 text-red-600 font-bold  p-1 rounded-3xl w-20 hover:bg-white'>Sair</button>
+            </form>
+        {% else %}
+        <a href="{%url 'filme:login'%}"><button class='bg-white p-1 rounded-3xl w-20'>Entrar</button></a>
+        {% endif %}
+    </div>
+</nav>
