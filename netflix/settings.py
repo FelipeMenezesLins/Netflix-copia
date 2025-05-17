@@ -77,6 +77,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'filme.context.filmes_destaques',
                 'filme.context.categorias_destaques',
+                'filme.context.filmes_populares',
             ],
         },
     },

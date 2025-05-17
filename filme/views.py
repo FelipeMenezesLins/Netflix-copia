@@ -34,9 +34,19 @@ class Homefilmes(LoginRequiredMixin, ListView):
     template_name = 'filmes.html'
     model = Filme 
 
+
+
 class Detalhesfilmes(LoginRequiredMixin, DetailView):
     template_name = 'episodios.html'
     model = Filme
+
+    def get(self, request, *args, **kwargs): 
+        filme = self.get_object()
+        filme.visualizacoes += 1
+        filme.save() 
+        usuario = request.user
+        usuario.filmes_vistos.add(filme)
+        return super().get(request, *args, **kwargs) 
 
     def get_context_data(self, **kwargs):
         context = super(Detalhesfilmes, self).get_context_data(**kwargs)
@@ -55,3 +65,16 @@ class CriarConta(FormView):
     
     def get_success_url(self):
         return reverse('filme:login')
+    
+class Pesquisa(ListView):
+    template_name = 'pesquisa.html'
+    model = Filme
+
+    def get_queryset(self):
+        termo_de_pesquisa = self.request.GET.get('query')
+
+        if termo_de_pesquisa:
+            object_list = Filme.objects.filter(name__icontains = termo_de_pesquisa)
+            return object_list
+        else:
+            return Filme.objects.none()

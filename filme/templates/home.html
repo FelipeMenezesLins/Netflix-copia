@@ -2,6 +2,24 @@
 {% load static %}
 {% block head %}
     <style>
+
+         button{
+        cursor:pointer;
+        }
+
+         button.btn-anterior {
+        background-image:linear-gradient(to right, rgba(0, 0, 0, 0.756), rgba(0, 0, 0, 0.006));
+        top:65%;
+        transform:translateY(-74%);
+
+        }
+
+    button.btn-proximo{
+        background-image:linear-gradient(to left, rgba(0, 0, 0, 0.756), rgba(0, 0, 0, 0.006));
+        top:65%;
+        transform:translateY(-74%);
+        right:0;
+    }
       
         .duvidas{
             background-color:#3F3F3F;
@@ -42,7 +60,7 @@
 {% endblock  %}
 
 {% block title %}
-    <title>Netflix</title>
+    <title>Hashflix</title>
 {% endblock  %}
 
 {% block content %}
@@ -70,7 +88,20 @@
               </header>              
             <div class='alta text-white p-5'>
                <h2 class='text-2xl'>Em alta!</h2>
-               <p>carrosel de filmes</p> 
+                 <div class="carrossel-container relative mb-10 overflow-hidden">
+                    <div class="carrossel flex transition-transform duration-500">
+                        {% for f in filmes_populares %}
+                            <div class="slide flex-shrink-0 mx-2">
+                            <a href="{% url 'filme:detalhesfilmes' f.pk %}">
+                                <img class="filmeslancados h-60 w-full object-cover rounded-lg" src="{{ f.imagem.url }}" alt="{{ f.name }}">
+                            </a>
+                            <p class="text-center mt-2 text-white">{{ f.name }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="btn-anterior absolute left-0 p-2 z-1000 h-11/12 w-25"></button>
+                    <button class="btn-proximo absolute right-0 p-2 z-1000 h-11/12 w-25 "></button>
+                 </div>
             </div>
         </div>
        <div class='motivos_home text-white p-5 lg:flex w-10/12 m-auto lg:flex-wrap lg:justify-center'>

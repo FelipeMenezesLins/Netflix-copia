@@ -10,5 +10,9 @@ def filmes_destaques(request):
         return None
 
 def categorias_destaques(request):
-    categoria = Filme.objects.filter(categoria=list_categoria)
-    return {'temas':categoria}
+    categoria = Filme.objects.filter(categoria = 'AÇÃO')
+    return {'acao': categoria}
+
+def filmes_populares(request):
+    lista_filmes_populares = Filme.objects.all().order_by('-visualizacoes')[0:10]
+    return {"filmes_populares": lista_filmes_populares}

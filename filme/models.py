@@ -21,12 +21,14 @@ class Filme(models.Model):
     descricao = models.TextField(max_length=1000)
     categoria = models.CharField(choices=list_categoria, max_length=30)
     data = models.DateTimeField(default=timezone.now)
+    visualizacoes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
 
 class Usuario(AbstractUser):
-    model = models.ManyToManyField(Filme)
+    filmes_vistos = models.ManyToManyField('Filme', blank=True, related_name='usuarios_que_viram')
+
 
 class Pergunta(models.Model):
     pergunta = models.CharField(max_length=200)
