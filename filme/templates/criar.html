@@ -43,7 +43,14 @@
             color:red;
         }
         main {
-            height:100vw;
+            height:100%;
+            background-color:black;
+        }
+
+        @media screen and (min-width:768px){
+            main{
+                background-image:url('{%static 'image/fundo-netflix.jpg'%}')
+            }
         }
     </style>
 {% endblock  %}
@@ -51,8 +58,8 @@
     <title>Hashflix | Criar</title>
 {% endblock  %}
 {% block content %}
-    <main class='bg-cover bg-no-repeat w-full md:pt-20 bg-black/50' style="background-image:url('{%static 'image/fundo-netflix.jpg'%}')">
-        <div class='md:bg-black/50 bg-black text-white p-5 md:rounded-xl shadow md:w-9/12 m-auto lg:w-5/12 text-sm'>
+    <main class='md:pb-10 bg-cover bg-no-repeat w-full md:pt-20 bg-black/50' >
+        <div class=' md:bg-black/50 bg-black text-white p-5 md:rounded-xl shadow md:w-9/12 m-auto lg:w-5/12 text-sm'>
             <form class='mt-15' method='post'>
                 {% csrf_token %}
                 {{form}}

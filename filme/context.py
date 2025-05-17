@@ -14,5 +14,5 @@ def categorias_destaques(request):
     return {'acao': categoria}
 
 def filmes_populares(request):
-    lista_filmes_populares = Filme.objects.all().order_by('-visualizacoes')[0:10]
+    lista_filmes_populares = Filme.objects.all().order_by('-visualizacoes')[0:5]
     return {"filmes_populares": lista_filmes_populares}
