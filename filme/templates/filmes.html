@@ -120,11 +120,11 @@
     }
     @media screen and (min-width:768px) and (max-width:992px) {
         .assistir{
-            top:70%;
+            top:65%;
             left:3%;
         }
     }
-    @media screen and (min-width:992px) and (max-width:1200px){
+    @media screen and (min-width:1025px) and (max-width:1200px){
         .assistir{
             top:78%;
             left:3%;
@@ -142,8 +142,8 @@
         shadow  flex justify-center items-center overflow-hidden h-screen' style="background-image:url('{{filme_destaque.imagem.url}}')">
     </header>
     {% for filme in object_list %}
-     <a class='assistir absolute bg-white text-xl p-4 lg:text-3xl rounded-3xl xl:w-50 flex  items.cente hover:bg-black hover:text-white
-        hover:font-bold' href="{{object.episodios.first.video}}">
+     <a class='assistir absolute bg-white text-xl p-4 lg:text-3xl rounded-3xl xl:w-50 flex  items.cente hover:bg-black hover:text-white border border-black' href="{{filme.episodios.first.video}}">
+      
             <span class="material-icons m-2 lg:text-xl">
                 play_arrow
             </span>
