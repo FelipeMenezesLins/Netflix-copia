@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" href="{%static 'css/login.css'%}">
+
    <style>
     input#id_username{
         background-color:white;
@@ -22,6 +22,10 @@
         width:90%;
     }
 
+    div {
+        background-color:transparent;
+    }
+
     footer a{
         display:block;
     }
@@ -33,6 +37,7 @@
             padding:20px;
         }
     }
+
    </style>
 {% endblock  %}
 {% block title %}
